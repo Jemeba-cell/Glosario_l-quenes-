@@ -1,6 +1,10 @@
 import streamlit as st
 from streamlit_carousel import carousel
 import base64
+from pathlib import Path
+
+# Directorio donde está este script (glosario/) para que las rutas de imágenes funcionen siempre
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 # --- Configuración de página (debe ir primero en Streamlit) ---
 st.set_page_config(
@@ -12,15 +16,24 @@ st.set_page_config(
 
 # --- Cargar imagen en base64 ---
 def get_image_base64(image_file):
+    """Acepta ruta relativa a glosario/ o Path. Resuelve desde SCRIPT_DIR."""
+    path = Path(image_file) if isinstance(image_file, str) else image_file
+    if not path.is_absolute():
+        path = SCRIPT_DIR / path
     try:
-        with open(image_file, "rb") as f:
+        with open(path, "rb") as f:
             return base64.b64encode(f.read()).decode()
     except FileNotFoundError:
         return None
 
+
+def path_imagen(rel_path):
+    """Convierte ruta relativa (ej. imagenes/fondo1.jpg) en path absoluto respecto al script."""
+    return str(SCRIPT_DIR / rel_path)
+
 # --- Estilos globales ---
 def inject_custom_css():
-    fondo_b64 = get_image_base64("imagenes/fondo1.jpg")
+    fondo_b64 = get_image_base64(path_imagen("imagenes/fondo1.jpg"))
     fondo_css = f'url("data:image/jpeg;base64,{fondo_b64}")' if fondo_b64 else "none"
 
     st.markdown(
@@ -204,16 +217,16 @@ st.markdown(
 
 # --- Glosario ---
 glosario = {
-    "Soredio": {"descripcion": "Estructura de dispersión...", "imagen": "imagenes/soredio.jpeg"},
-    "Soralio": {"descripcion": "Área del talo...", "imagen": "imagenes/soralio.jpeg"},
-    "Isidio": {"descripcion": "Pequeñas prolongaciones...", "imagen": "imagenes/isidios.jpeg"},
-    "Apotecio": {"descripcion": "Estructura reproductora sexual...", "imagen": "imagenes/apotecio.jpg"},
-    "Picnidio": {"descripcion": "Estructura reproductora asexual...", "imagen": "imagenes/picnidio.jfif"},
-    "Folioso": {"descripcion": "Líquenes con lóbulos planos...", "imagen": "imagenes/folioso.jpg"},
-    "Fruticoso": {"descripcion": "Líquenes ramificados...", "imagen": "imagenes/fruticoso.jpg"},
-    "Costroso": {"descripcion": "Líquenes adheridos al sustrato...", "imagen": "imagenes/costroso.jfif"},
-    "Gelatinoso": {"descripcion": "Talo flexible y gelatinoso...", "imagen": "imagenes/gelatinoso.jfif"},
-    "Compuesto": {"descripcion": "Combinación de formas...", "imagen": "imagenes/compuesto.jfif"},
+    "Soredio": {"descripcion": "Estructura de dispersión...", "imagen": path_imagen("imagenes/soredio.jpeg")},
+    "Soralio": {"descripcion": "Área del talo...", "imagen": path_imagen("imagenes/soralio.jpeg")},
+    "Isidio": {"descripcion": "Pequeñas prolongaciones...", "imagen": path_imagen("imagenes/isidios.jpeg")},
+    "Apotecio": {"descripcion": "Estructura reproductora sexual...", "imagen": path_imagen("imagenes/apotecio.jpg")},
+    "Picnidio": {"descripcion": "Estructura reproductora asexual...", "imagen": path_imagen("imagenes/picnidio.jfif")},
+    "Folioso": {"descripcion": "Líquenes con lóbulos planos...", "imagen": path_imagen("imagenes/folioso.jpg")},
+    "Fruticoso": {"descripcion": "Líquenes ramificados...", "imagen": path_imagen("imagenes/fruticoso.jpg")},
+    "Costroso": {"descripcion": "Líquenes adheridos al sustrato...", "imagen": path_imagen("imagenes/costroso.jfif")},
+    "Gelatinoso": {"descripcion": "Talo flexible y gelatinoso...", "imagen": path_imagen("imagenes/gelatinoso.jfif")},
+    "Compuesto": {"descripcion": "Combinación de formas...", "imagen": path_imagen("imagenes/compuesto.jfif")},
 }
 
 termino = st.text_input("", placeholder="🔍 Escribe un término del glosario", label_visibility="collapsed")
@@ -237,10 +250,10 @@ st.markdown("---")
 st.markdown('<p class="section-title">Acerca del proyecto</p>', unsafe_allow_html=True)
 
 imagenes_carrusel = [
-    {"img": "imagenes/carrusel1.png", "title": "", "text": ""},
-    {"img": "imagenes/carrusel2.jpg", "title": "", "text": ""},
-    {"img": "imagenes/carrusel3.jpg", "title": "", "text": ""},
-    {"img": "imagenes/carrusel4.jpg", "title": "", "text": ""},
+    {"img": path_imagen("imagenes/Carrusel1.png"), "title": "", "text": ""},
+    {"img": path_imagen("imagenes/Carrusel2.jpg"), "title": "", "text": ""},
+    {"img": path_imagen("imagenes/Carrusel3.jpg"), "title": "", "text": ""},
+    {"img": path_imagen("imagenes/Carrusel4.jpg"), "title": "", "text": ""},
 ]
 carousel(items=imagenes_carrusel, container_height=420)
 
