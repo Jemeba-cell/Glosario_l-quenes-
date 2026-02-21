@@ -6,9 +6,6 @@ from pathlib import Path
 # Directorio donde está este script (glosario/) para que las rutas de imágenes funcionen siempre
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-#PRUEBA DE SUBIR A GITHUB CAMBIOS
-
-
 # --- Configuración de página (debe ir primero en Streamlit) ---
 st.set_page_config(
     page_title="Glosario de Liquenología",
