@@ -82,10 +82,10 @@ def inject_custom_css():
 
         /* === Buscador === */
         .stTextInput > div > div > input {{
-            background: rgba(255,255,255,0.12) !important;
-            border: 1px solid rgba(255,255,255,0.25) !important;
+            background: #ffffff !important;
+            border: 1px solid rgba(0,0,0,0.2) !important;
             border-radius: 12px !important;
-            color: #f0f8f0 !important;
+            color: #1a1a1a !important;
             padding: 0.75rem 1rem !important;
             font-size: 1rem !important;
         }}
