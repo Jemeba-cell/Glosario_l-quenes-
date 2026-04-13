@@ -331,9 +331,10 @@ def inject_css():
         font-size: 1.15rem !important;
     }}
     .stMarkdown p, [data-testid="stMarkdownContainer"] p {{
-        color: rgba(220,240,225,0.9) !important;
+        color:  #ffffff !important;
         font-family: 'Source Sans 3', sans-serif;
         line-height: 1.7;
+         font-size: 1.5rem !important;
     }}
     .page-subtitle {{
         text-align: center;
