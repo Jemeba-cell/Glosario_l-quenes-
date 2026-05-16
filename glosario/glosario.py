@@ -21,7 +21,7 @@ def get_image_base64(image_file):
     try:
         with open(path, "rb") as f:
             return base64.b64encode(f.read()).decode()
-    except FileNotFoundError:
+    except (FileNotFoundError, OSError):
         return None
 
 def path_imagen(rel_path):
@@ -74,220 +74,134 @@ glosario = {
 }
 
 # ─────────────────────────────────────────────
+# DATOS: DEFINICIONES POST-IT (Definición Ecológica)
+# ─────────────────────────────────────────────
+DEFINICIONES_POSTIT = {
+    "asociación simbiótica mutualista": {
+        "titulo": "Asociación Simbiótica Mutualista",
+        "definicion": "Relación biológica íntima y duradera entre dos organismos de especies diferentes (hongo + alga/cianobacteria) donde ambos se benefician: el hongo proporciona estructura, protección y nutrientes, mientras el fotobionte aporta carbohidratos mediante fotosíntesis. Es la base de la organización del talo liquénico."
+    },
+    "ecológicamente estable": {
+        "titulo": "Ecológicamente Estable",
+        "definicion": "Condición de un sistema o asociación que mantiene sus propiedades estructurales y funcionales a lo largo del tiempo frente a perturbaciones ambientales normales. En líquenes, implica la persistencia de la simbiosis sin desintegración del talo bajo condiciones ambientales variables."
+    },
+    "umbrales de resiliencia": {
+        "titulo": "Umbrales de Resiliencia",
+        "definicion": "Límites críticos de perturbación ambiental (humedad, temperatura, radiación, contaminantes) que un ecosistema o organismo puede tolerar antes de sufrir un cambio cualitativo irreversible. Los líquenes poseen umbrales amplios gracias a su poiquilohidria y metabolismo flexible."
+    },
+    "niveles tróficos": {
+        "titulo": "Niveles Tróficos",
+        "definicion": "Posiciones que ocupan los organismos en una cadena alimentaria según su fuente de energía y nutrientes. En líquenes, el fotobionte ocupa el nivel productor (autótrofo), mientras el micobionte es heterótrofo; juntos conforman una unidad funcional que interactúa con otros niveles del ecosistema."
+    },
+    "asociaciones dinámicas": {
+        "titulo": "Asociaciones Dinámicas",
+        "definicion": "Interacciones biológicas que cambian en intensidad, especificidad o composición a lo largo del tiempo o según condiciones ambientales. Los líquenes presentan asociaciones dinámicas porque pueden modificar la proporción hongo-alga, incorporar nuevos simbiontes o ajustar su fisiología según el hábitat."
+    },
+    "holobionte complejo": {
+        "titulo": "Holobionte Complejo",
+        "definicion": "Entidad biológica que funciona como un solo organismo pero está compuesta por el hospedero (hongo liquénico) y toda su microbiota asociada (algas, cianobacterias, bacterias, líquenes endofíticos y otros microorganismos), interactuando como una unidad de selección ecológica y evolutiva."
+    }
+}
+
+# ─────────────────────────────────────────────
 # DATOS: categorías y subtemas
 # ─────────────────────────────────────────────
 CATEGORIAS = {
     "🔬 Anatomía y Morfología": {
-        "descripcion_general": (
-            "La anatomía y morfología de los líquenes abarca el estudio de su forma externa e interna, "
-            "desde la organización del talo liquénico hasta las estructuras reproductivas. "
-            "Esta disciplina es fundamental para la identificación, clasificación y comprensión "
-            "de la diversidad liquénica."
-        ),
+        "descripcion_general": "Estudio de la forma externa e interna de los líquenes.",
         "subtemas": {
             "Morfología externa": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición del talo liquénico": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Retención de agua": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Resistencia a la radiación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Colonización de sustratos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Tipos de corteza": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Tipos de talo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Características externas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Anatomía interna y organización tisular": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Variaciones anatómicas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Capa algal": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Médula": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Estructuras reproductivas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🌱 Ecología": {
-        "descripcion_general": (
-            "La ecología de los líquenes estudia sus relaciones con el ambiente y otros organismos. "
-            "Son organismos altamente adaptados a condiciones extremas y cumplen roles ecológicos "
-            "fundamentales en los ecosistemas donde habitan, desde la fijación de nitrógeno "
-            "hasta la formación de suelos."
-        ),
+        "descripcion_general": "Estudio de las relaciones de los líquenes con el ambiente y otros organismos.",
         "subtemas": {
             "Introducción y bases ecológicas de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición ecológica de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Hipótesis 'Everything is everywhere, but the environment selects'": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Funciones bacterianas en los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Hábitats de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Tipos de líquenes según el lugar en donde se encuentren": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Adaptaciones ecológicas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Roles ecológicos de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Líquenes como pioneros": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Ciclos biogeoquímicos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Interacciones con fauna": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Indicadoras ambientales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Líquenes y cambio ambiental": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Métodos de estudio y recolecta": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Teoría del continuum": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🧬 Evolución": {
-        "descripcion_general": (
-            "El estudio evolutivo de los líquenes explora el origen y diversificación de la simbiosis "
-            "liquénica a lo largo del tiempo geológico. La evidencia fósil, molecular y los patrones "
-            "de coespeciación revelan una historia evolutiva compleja y fascinante."
-        ),
+        "descripcion_general": "Origen y diversificación de la simbiosis liquénica.",
         "subtemas": {
-            "Origen evolutivo de la liquenización y la simbiosis liquénica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Origen evolutivo de la liquenización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición evolutiva del líquen": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Asociaciones intermedias de la liquenización y otros organismos asociados": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Evidencia fósil, molecular, Eventos de liquenización, Deliquenización y Reliquenización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Coespeciación y cospeciación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Cleptobiosis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Procesos macro y microevolutivos en los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🗺️ Biogeografía": {
-        "descripcion_general": (
-            "La biogeografía liquénica analiza los patrones de distribución geográfica de los líquenes "
-            "y los procesos históricos y ecológicos que los explican. Elementos como el Mar de Tetis "
-            "han jugado un papel clave en la distribución actual de muchas especies."
-        ),
+        "descripcion_general": "Patrones de distribución geográfica de los líquenes.",
         "subtemas": {
             "Distribución según la región": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "El Mar de Tetis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "📜 Historia": {
-        "descripcion_general": (
-            "La historia de la liquenología abarca desde las primeras observaciones antes de Cristo "
-            "hasta los estudios modernos. Figuras como Erik Acharius y Nylander marcaron hitos "
-            "fundamentales en el desarrollo de esta ciencia."
-        ),
+        "descripcion_general": "Historia de la liquenología desde la antigüedad hasta la actualidad.",
         "subtemas": {
             "Los líquenes antes de Cristo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Edad Media": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Estudios de los líquenes antes de Acharius": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Erick Acharius el padre de la liquenología": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Antes de Nylander": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Inglaterra y Francia, Nylander y el descontento con la escuela Italiana": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Los efectos de la influencia de Nylander": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Estudios de la liquenología en la actualidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "⚗️ Metabolitos Secundarios": {
-        "descripcion_general": (
-            "Los metabolitos secundarios liquénicos son compuestos químicos únicos producidos por "
-            "la simbiosis. Su estudio abarca desde las rutas biosintéticas hasta su detección "
-            "y aplicaciones potenciales en medicina y biotecnología."
-        ),
+        "descripcion_general": "Compuestos químicos únicos producidos por la simbiosis liquénica.",
         "subtemas": {
             "Origen de los metabolitos secundarios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Rutas biosintéticas principales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Poliquétidos y enzimas PKS": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Estudios moleculares y expresión heteróloga": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Detección de metabolitos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🍃 Metabolismo y Nutrición": {
-        "descripcion_general": (
-            "El metabolismo y nutrición de los líquenes comprende los procesos de intercambio de agua, "
-            "carbono, nitrógeno y minerales en la simbiosis. Su entendimiento es clave para comprender "
-            "cómo estos organismos sobreviven en ambientes extremos."
-        ),
+        "descripcion_general": "Procesos de intercambio de agua, carbono, nitrógeno y minerales.",
         "subtemas": {
-            "Arquitectura y flujo apoplástico, Hidrofobinas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Poiquilohidria, ventanas de actividad y dominancia en extremos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Fotobiontes y hábitat": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Sequía, cavitación y mecánica de pared": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Cuerpos concéntricos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Nucleación de hielo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Fotosíntesis y respiración": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Resistencia a la difusión y su relación con la humedad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Modos de rehidratación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Balance fotosíntesis-respiración": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Asignación de recursos en la simbiosis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Tendencias entre líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Translocación del carbono": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Sumideros de carbono": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Importancia del nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Líquenes y formas de nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Metabolismo del nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Relación cefalodios-talo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Exceso de nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Patrones diarios de fijación y factores ambientales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Propiedades físicas y químicas de minerales y otros elementos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Dependencias atmosféricas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Otros requerimientos nutricionales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Mecanismos de acumulación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Fuentes de nutrientes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Compartimentalización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Toxicidad por metales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🌀 Morfogénesis del Talo": {
-        "descripcion_general": (
-            "La morfogénesis del talo estudia cómo se desarrolla y diferencia la estructura del líquen "
-            "desde sus componentes simbióticos hasta el talo maduro. Involucra procesos de reconocimiento, "
-            "inducción de fenotipos y diferenciación tisular."
-        ),
+        "descripcion_general": "Desarrollo y diferenciación de la estructura del líquen.",
         "subtemas": {
             "Particularidades de la simbiosis liquénica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Macro y microlíquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Reconocimiento y especificidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Propágulos simbióticos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Pretalo como etapa intermedia": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Inducción de fenotipos simbióticos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Diferenciación del talo estratificado": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Morfología funcional del talo maduro": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Regulación y plasticidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Líquenes bipartitas y tripartitas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Secreción y síntesis de pared en Ramalina menziesii": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🔁 Reproducción": {
-        "descripcion_general": (
-            "La reproducción liquénica engloba tanto estrategias sexuales como asexuales. "
-            "El debate actual sobre la relevancia de cada modo reproductivo y la diversidad "
-            "de estructuras involucradas hacen de este tema uno de los más dinámicos en la liquenología."
-        ),
+        "descripcion_general": "Estrategias sexuales y asexuales de reproducción liquénica.",
         "subtemas": {
             "Reproducción sexual": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Contexto genético en líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Debate actual": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Los líquenes foliícolas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Diversidad de estructuras reproductivas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Morfogénesis de los soredios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Morfogénesis de los isidios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Morfogénesis del Peritecio": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🏷️ Sistemática y Taxonomía": {
-        "descripcion_general": (
-            "La sistemática y taxonomía liquénica organiza la diversidad de líquenes en un sistema "
-            "clasificatorio coherente. Desde los conceptos de especie hasta los géneros más "
-            "representativos en México, esta disciplina integra morfología, química y filogenia."
-        ),
+        "descripcion_general": "Organización de la diversidad liquénica en un sistema clasificatorio.",
         "subtemas": {
             "Conceptos clave en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Conceptos alternativos a especie taxonómica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Caracteres usados en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Cromatografía en Capa Fina": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Principales órdenes y familias": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Claves interpretativas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Géneros más representativos en México": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Retos en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Sistemática y conservación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Evaluación de especies amenazadas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
-            "Sistemática y biogeografía": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
 }
 
 # ─────────────────────────────────────────────
-# CSS GLOBAL
+# CSS GLOBAL + POST-ITS
 # ─────────────────────────────────────────────
 def inject_css():
     fondo_b64 = get_image_base64(path_imagen("imagenes/fondo1.jpg"))
     fondo_css = f'url("data:image/jpeg;base64,{fondo_b64}")' if fondo_b64 else "none"
 
-    st.markdown(f"""
+    css = f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&family=Patrick+Hand&display=swap');
 
     .stApp {{
         background-image: {fondo_css};
@@ -455,10 +369,203 @@ def inject_css():
         font-size: 1.15rem !important;
         margin-bottom: 1rem !important;
     }}
+    
+    /* ─── POST-IT SYSTEM ─── */
+    .postit-modal {{
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.6);
+        backdrop-filter: blur(3px);
+        animation: fadeIn 0.3s ease;
+    }}
+    
+    .postit-modal:target {{
+        display: block;
+    }}
+    
+    @keyframes fadeIn {{
+        from {{ opacity: 0; }}
+        to {{ opacity: 1; }}
+    }}
+    
+    .postit-content {{
+        position: relative;
+        background: #fef3a8;
+        background: linear-gradient(135deg, #fef3a8 0%, #f9e79f 100%);
+        margin: 10% auto;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 2px;
+        box-shadow: 
+            0 1px 4px rgba(0,0,0,0.2),
+            0 0 40px rgba(0,0,0,0.1) inset,
+            5px 5px 15px rgba(0,0,0,0.3);
+        color: #2c3e50 !important;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        transform: rotate(-1deg);
+        animation: slideIn 0.4s ease;
+    }}
+    
+    .postit-content::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: rgba(0,0,0,0.03);
+        border-radius: 2px 2px 0 0;
+    }}
+    
+    @keyframes slideIn {{
+        from {{ transform: translateY(-50px) rotate(-3deg); opacity: 0; }}
+        to {{ transform: translateY(0) rotate(-1deg); opacity: 1; }}
+    }}
+    
+    .postit-content h3 {{
+        color: #1a3025 !important;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 1rem !important;
+        border-bottom: 2px solid rgba(0,0,0,0.1);
+        padding-bottom: 0.5rem;
+    }}
+    
+    .postit-content p {{
+        color: #2c3e50 !important;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
+        font-size: 1.1rem !important;
+        line-height: 1.7 !important;
+    }}
+    
+    .postit-close {{
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #8b7355;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 10;
+    }}
+    
+    .postit-close:hover {{
+        color: #5d4e37;
+    }}
+    
+    .term-link {{
+        color: #ffd700 !important;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+    }}
+    
+    .term-link:hover {{
+        color: #ffed4a !important;
+        text-shadow: 0 0 8px rgba(255,215,0,0.4);
+    }}
+    
+    .definicion-texto {{
+        font-size: 1.15rem !important;
+        line-height: 1.9 !important;
+        text-align: justify;
+        color: #e8f5e9 !important;
+    }}
     </style>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(css, unsafe_allow_html=True)
 
 inject_css()
+
+# ─────────────────────────────────────────────
+# FUNCIÓN: Generar HTML de definición con post-its
+# ─────────────────────────────────────────────
+def generar_texto_definicion_ecologica():
+    """Genera el texto de definición ecológica con hipervínculos a post-its"""
+    
+    texto = """
+    <div class="definicion-texto">
+    <p>Desde una perspectiva ecológica, los <strong>líquenes</strong> se definen como una 
+    <a href="#postit-simbiosis" class="term-link">asociación simbiótica mutualista</a> 
+    entre un hongo (micobionte) y uno o más organismos fotosintéticos (fotobiontes), 
+    generalmente algas verdes o cianobacterias. Esta asociación no es meramente una 
+    coexistencia casual, sino una integración funcional tan profunda que el conjunto 
+    resultante —el talo liquénico— se comporta como un único organismo con propiedades 
+    emergentes que ninguno de sus componentes posee por separado.</p>
+    
+    <p>El líquen representa, en esencia, un sistema <a href="#postit-estable" class="term-link">ecológicamente estable</a> 
+    que ha perdurado a través de millones de años de evolución. Su estabilidad no implica 
+    rigidez, sino una capacidad de mantener la homeostasis interna frente a fluctuaciones 
+    ambientales significativas. Los líquenes demuestran una notable plasticidad fisiológica, 
+    operando dentro de <a href="#postit-resiliencia" class="term-link">umbrales de resiliencia</a> 
+    que les permiten sobrevivir en condiciones extremas —deserticas hasta antárticas— 
+    donde organismos más complejos fracasan.</p>
+    
+    <p>A diferencia de las relaciones tróficas convencionales observadas en 
+    <a href="#postit-troficos" class="term-link">niveles tróficos</a> clásicos, la simbiosis 
+    liquénica trasciende la simple transferencia de energía. El fotobionte aporta carbohidratos 
+    fotosintéticos al hongo, quien a su vez proporciona protección estructural, agua y 
+    nutrientes minerales. Este intercambio simbiótico posiciona al líquen en una categoría 
+    funcional única: no es un productor primario ni un consumidor en el sentido estricto, 
+    sino una entidad híbrida que modifica radicalmente los flujos de materia y energía 
+    en los ecosistemas donde habita.</p>
+    
+    <p>Contemporáneamente, la investigación ha revelado que los líquenes son 
+    <a href="#postit-dinamicas" class="term-link">asociaciones dinámicas</a> cuya composición 
+    microbiana varía según el contexto ambiental. No son entidades estáticas, sino sistemas 
+    adaptativos que pueden incorporar bacterias, otros hongos y microorganismos según las 
+    demandas ecológicas del hábitat. Esta dinamicidad desafía las definiciones taxonómicas 
+    rígidas y enfatiza su naturaleza como consorcios biológicos en constante reconfiguración.</p>
+    
+    <p>En la visión más moderna, los líquenes se conceptualizan como un 
+    <a href="#postit-holobionte" class="term-link">holobionte complejo</a>: una metaorganización 
+    donde el hospedero fúngico y toda su microbiota asociada funcionan como una unidad 
+    de selección natural. Esta perspectiva holobionte integra no solo al micobionte y 
+    fotobionte principales, sino también a bacterias, arqueas, líquenes endofíticos y 
+    virus que modulan la fisiología, ecología y evolución del conjunto. El líquen, 
+    entonces, no es un organismo dual sino una comunidad funcional que ha alcanzado 
+    un grado de integración tal que opera como individuo ecológico.</p>
+    </div>
+    """
+    
+    modales = ""
+    terminos = [
+        ("simbiosis", "asociación simbiótica mutualista"),
+        ("estable", "ecológicamente estable"),
+        ("resiliencia", "umbrales de resiliencia"),
+        ("troficos", "niveles tróficos"),
+        ("dinamicas", "asociaciones dinámicas"),
+        ("holobionte", "holobionte complejo"),
+    ]
+    
+    for id_suffix, clave in terminos:
+        info = DEFINICIONES_POSTIT[clave]
+        modal_html = (
+            f'<div id="postit-{id_suffix}" class="postit-modal" '
+            f'onclick="if(event.target == this){{window.location.hash=\'\';}}">'
+            f'<div class="postit-content" onclick="event.stopPropagation();">'
+            f'<a href="#" class="postit-close">&times;</a>'
+            f'<h3>📌 {info["titulo"]}</h3>'
+            f'<p>{info["definicion"]}</p>'
+            f'</div></div>'
+        )
+        modales += modal_html
+    
+    return texto + modales
 
 # ─────────────────────────────────────────────
 # ESTADO DE SESIÓN
@@ -590,16 +697,52 @@ elif st.session_state.vista in CATEGORIAS:
         st.markdown("---")
         st.markdown('<div class="subtema-card">', unsafe_allow_html=True)
         st.markdown(f"## {subtema_actual}")
-        st.markdown('<span class="placeholder-badge">⏳ Contenido en desarrollo</span>', unsafe_allow_html=True)
-
-        texto = info_sub.get("texto", "")
-        if texto:
-            st.markdown(texto)
+        
+        # ─── CONTENIDO ESPECIAL: Definición Ecológica ───
+        if subtema_actual == "Definición ecológica de los líquenes":
+            st.markdown('<span class="placeholder-badge">📖 Contenido desarrollado</span>', unsafe_allow_html=True)
+            
+            html_definicion = generar_texto_definicion_ecologica()
+            st.markdown(html_definicion, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            st.markdown("### 🔬 Implicaciones Ecológicas")
+            st.markdown("""
+            <div class="definicion-texto">
+            <p>La definición ecológica del líquen subraya que no es un mero accidente evolutivo, 
+            sino una estrategia biológica exitosa que ha colonizado prácticamente todos los 
+            ecosistemas terrestres. Como <strong>pioneros ecológicos</strong>, los líquenes inician 
+            la sucesión primaria en sustratos desnudos (roca, suelo volcánico, corteza recién 
+            expuesta), contribuyendo a la formación de suelo mediante la acumulación de materia 
+            orgánica y la lixiviación de minerales.</p>
+            
+            <p>Su función como <strong>indicadores ambientales</strong> deriva directamente de 
+            esta definición ecológica: al ser organismos que integran múltiples componentes 
+            biológicos en una sola entidad funcional, cualquier alteración en la calidad del aire, 
+            agua o suelo se refleja de manera amplificada en su fisiología, crecimiento y 
+            distribución. La sensibilidad del holobionte liquénico a los contaminantes atmosféricos 
+            lo convierte en una herramienta de monitoreo ambiental sin paralelo en el reino vegetal.</p>
+            
+            <p>Finalmente, la naturaleza de <strong>asociación dinámica</strong> explica la 
+            extraordinaria diversidad ecológica de los líquenes: un mismo micobionte puede asociarse 
+            con diferentes fotobiontes según el hábitat, generando talos morfológicamente distintos 
+            adaptados a condiciones lumínicas, hídricas y térmicas específicas. Esta plasticidad 
+            simbiótica es, en sí misma, una innovación evolutiva que explica la persistencia y 
+            radiación adaptativa de los líquenes a lo largo de más de 400 millones de años.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
         else:
-            st.info(
-                "El contenido detallado de este subtema se añadirá próximamente. "
-                "Aquí aparecerán textos, imágenes, videos y diagramas de apoyo."
-            )
+            st.markdown('<span class="placeholder-badge">⏳ Contenido en desarrollo</span>', unsafe_allow_html=True)
+
+            texto = info_sub.get("texto", "")
+            if texto:
+                st.markdown(texto)
+            else:
+                st.info(
+                    "El contenido detallado de este subtema se añadirá próximamente. "
+                    "Aquí aparecerán textos, imágenes, videos y diagramas de apoyo."
+                )
 
         imagenes = info_sub.get("imagenes", [])
         if imagenes:
