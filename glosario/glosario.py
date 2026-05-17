@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from pathlib import Path
 import base64
 
@@ -624,12 +625,35 @@ def inject_css():
         font-weight: bold;
         margin-bottom: 0.5rem;
         padding-bottom: 0.4rem;
+        padding-right: 2rem;
         border-bottom: 2px solid rgba(0,0,0,0.12);
     }}
     .postit-card .postit-body {{
         display: block;
         color: #2c3e50;
         font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+    }}
+    .postit-card .postit-close {{
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        width: 26px;
+        height: 26px;
+        line-height: 22px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #8b7355;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 50%;
+        transition: background 0.15s, color 0.15s, transform 0.15s;
+        z-index: 2;
+    }}
+    .postit-card .postit-close:hover {{
+        color: #5d4e37;
+        background: rgba(0,0,0,0.08);
+        transform: rotate(90deg);
     }}
     </style>
     """
@@ -651,10 +675,60 @@ def term(k, label):
         f'<details class="term-detail">'
         f'<summary class="term-link">{label}</summary>'
         f'<span class="postit-card">'
+        f'<span class="postit-close" role="button" aria-label="Cerrar" title="Cerrar">&times;</span>'
         f'<span class="postit-title">📌 {info["titulo"]}</span>'
         f'<span class="postit-body">{info["definicion"]}</span>'
         f'</span>'
         f'</details>'
+    )
+
+
+def inyectar_handler_cerrar_postit():
+    """Inyecta un manejador JS global (vía iframe) que cierra los post-its.
+
+    Se hace clic en la "×" o fuera del post-it y se cierra el <details>
+    correspondiente. Usa parent.document porque streamlit.components.v1.html
+    renderiza un iframe; necesitamos enganchar los listeners al documento
+    principal de Streamlit.
+    """
+    components.html(
+        """
+        <script>
+        (function () {
+          const doc = window.parent && window.parent.document;
+          if (!doc || doc.__postitHandlerAttached) return;
+          doc.__postitHandlerAttached = true;
+
+          doc.addEventListener('click', function (e) {
+            const closeBtn = e.target && e.target.closest && e.target.closest('.postit-close');
+            if (closeBtn) {
+              const d = closeBtn.closest('details.term-detail');
+              if (d) {
+                d.removeAttribute('open');
+                e.preventDefault();
+                e.stopPropagation();
+              }
+              return;
+            }
+            const opened = doc.querySelectorAll('details.term-detail[open]');
+            opened.forEach(function (d) {
+              if (!d.contains(e.target)) {
+                d.removeAttribute('open');
+              }
+            });
+          }, true);
+
+          doc.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+              doc.querySelectorAll('details.term-detail[open]').forEach(function (d) {
+                d.removeAttribute('open');
+              });
+            }
+          });
+        })();
+        </script>
+        """,
+        height=0,
     )
 
 def generar_texto_definicion_ecologica():
@@ -894,6 +968,7 @@ elif st.session_state.vista in CATEGORIAS:
 
             html_definicion = generar_texto_definicion_ecologica()
             st.markdown(html_definicion, unsafe_allow_html=True)
+            inyectar_handler_cerrar_postit()
 
             st.markdown("---")
             st.markdown("### 🔬 Implicaciones Ecológicas")
