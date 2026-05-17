@@ -137,86 +137,202 @@ DEFINICIONES_POSTIT = {
 # ─────────────────────────────────────────────
 CATEGORIAS = {
     "🔬 Anatomía y Morfología": {
-        "descripcion_general": "Estudio de la forma externa e interna de los líquenes.",
+        "descripcion_general": (
+            "La anatomía y morfología de los líquenes abarca el estudio de su forma externa e interna, "
+            "desde la organización del talo liquénico hasta las estructuras reproductivas. "
+            "Esta disciplina es fundamental para la identificación, clasificación y comprensión "
+            "de la diversidad liquénica."
+        ),
         "subtemas": {
             "Morfología externa": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición del talo liquénico": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Retención de agua": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Resistencia a la radiación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Colonización de sustratos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Tipos de corteza": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Tipos de talo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Características externas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Anatomía interna y organización tisular": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Variaciones anatómicas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Capa algal": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Médula": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Estructuras reproductivas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🌱 Ecología": {
-        "descripcion_general": "Estudio de las relaciones de los líquenes con el ambiente y otros organismos.",
+        "descripcion_general": (
+            "La ecología de los líquenes estudia sus relaciones con el ambiente y otros organismos. "
+            "Son organismos altamente adaptados a condiciones extremas y cumplen roles ecológicos "
+            "fundamentales en los ecosistemas donde habitan, desde la fijación de nitrógeno "
+            "hasta la formación de suelos."
+        ),
         "subtemas": {
             "Introducción y bases ecológicas de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición ecológica de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Hipótesis 'Everything is everywhere, but the environment selects'": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Funciones bacterianas en los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Hábitats de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Tipos de líquenes según el lugar en donde se encuentren": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Adaptaciones ecológicas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Roles ecológicos de los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Líquenes como pioneros": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Ciclos biogeoquímicos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Interacciones con fauna": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Indicadoras ambientales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Líquenes y cambio ambiental": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Métodos de estudio y recolecta": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Teoría del continuum": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🧬 Evolución": {
-        "descripcion_general": "Origen y diversificación de la simbiosis liquénica.",
+        "descripcion_general": (
+            "El estudio evolutivo de los líquenes explora el origen y diversificación de la simbiosis "
+            "liquénica a lo largo del tiempo geológico. La evidencia fósil, molecular y los patrones "
+            "de coespeciación revelan una historia evolutiva compleja y fascinante."
+        ),
         "subtemas": {
-            "Origen evolutivo de la liquenización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Origen evolutivo de la liquenización y la simbiosis liquénica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Definición evolutiva del líquen": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Asociaciones intermedias de la liquenización y otros organismos asociados": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Evidencia fósil, molecular, Eventos de liquenización, Deliquenización y Reliquenización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Coespeciación y cospeciación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Cleptobiosis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Procesos macro y microevolutivos en los líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🗺️ Biogeografía": {
-        "descripcion_general": "Patrones de distribución geográfica de los líquenes.",
+        "descripcion_general": (
+            "La biogeografía liquénica analiza los patrones de distribución geográfica de los líquenes "
+            "y los procesos históricos y ecológicos que los explican. Elementos como el Mar de Tetis "
+            "han jugado un papel clave en la distribución actual de muchas especies."
+        ),
         "subtemas": {
             "Distribución según la región": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "El Mar de Tetis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "📜 Historia": {
-        "descripcion_general": "Historia de la liquenología desde la antigüedad hasta la actualidad.",
+        "descripcion_general": (
+            "La historia de la liquenología abarca desde las primeras observaciones antes de Cristo "
+            "hasta los estudios modernos. Figuras como Erik Acharius y Nylander marcaron hitos "
+            "fundamentales en el desarrollo de esta ciencia."
+        ),
         "subtemas": {
             "Los líquenes antes de Cristo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Edad Media": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Estudios de los líquenes antes de Acharius": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Erick Acharius el padre de la liquenología": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Antes de Nylander": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Inglaterra y Francia, Nylander y el descontento con la escuela Italiana": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Los efectos de la influencia de Nylander": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Estudios de la liquenología en la actualidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "⚗️ Metabolitos Secundarios": {
-        "descripcion_general": "Compuestos químicos únicos producidos por la simbiosis liquénica.",
+        "descripcion_general": (
+            "Los metabolitos secundarios liquénicos son compuestos químicos únicos producidos por "
+            "la simbiosis. Su estudio abarca desde las rutas biosintéticas hasta su detección "
+            "y aplicaciones potenciales en medicina y biotecnología."
+        ),
         "subtemas": {
             "Origen de los metabolitos secundarios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Rutas biosintéticas principales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Poliquétidos y enzimas PKS": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Estudios moleculares y expresión heteróloga": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Detección de metabolitos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🍃 Metabolismo y Nutrición": {
-        "descripcion_general": "Procesos de intercambio de agua, carbono, nitrógeno y minerales.",
+        "descripcion_general": (
+            "El metabolismo y nutrición de los líquenes comprende los procesos de intercambio de agua, "
+            "carbono, nitrógeno y minerales en la simbiosis. Su entendimiento es clave para comprender "
+            "cómo estos organismos sobreviven en ambientes extremos."
+        ),
         "subtemas": {
+            "Arquitectura y flujo apoplástico, Hidrofobinas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Poiquilohidria, ventanas de actividad y dominancia en extremos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Fotobiontes y hábitat": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Sequía, cavitación y mecánica de pared": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Cuerpos concéntricos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Nucleación de hielo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Fotosíntesis y respiración": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Resistencia a la difusión y su relación con la humedad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Modos de rehidratación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Balance fotosíntesis-respiración": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Asignación de recursos en la simbiosis": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Tendencias entre líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Translocación del carbono": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Sumideros de carbono": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Importancia del nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Líquenes y formas de nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Metabolismo del nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Relación cefalodios-talo": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Exceso de nitrógeno": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Patrones diarios de fijación y factores ambientales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Propiedades físicas y químicas de minerales y otros elementos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Dependencias atmosféricas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Otros requerimientos nutricionales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Mecanismos de acumulación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Fuentes de nutrientes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Compartimentalización": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Toxicidad por metales": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🌀 Morfogénesis del Talo": {
-        "descripcion_general": "Desarrollo y diferenciación de la estructura del líquen.",
+        "descripcion_general": (
+            "La morfogénesis del talo estudia cómo se desarrolla y diferencia la estructura del líquen "
+            "desde sus componentes simbióticos hasta el talo maduro. Involucra procesos de reconocimiento, "
+            "inducción de fenotipos y diferenciación tisular."
+        ),
         "subtemas": {
             "Particularidades de la simbiosis liquénica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Macro y microlíquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Reconocimiento y especificidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Propágulos simbióticos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Pretalo como etapa intermedia": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Inducción de fenotipos simbióticos": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Diferenciación del talo estratificado": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Morfología funcional del talo maduro": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Regulación y plasticidad": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Líquenes bipartitas y tripartitas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Secreción y síntesis de pared en Ramalina menziesii": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🔁 Reproducción": {
-        "descripcion_general": "Estrategias sexuales y asexuales de reproducción liquénica.",
+        "descripcion_general": (
+            "La reproducción liquénica engloba tanto estrategias sexuales como asexuales. "
+            "El debate actual sobre la relevancia de cada modo reproductivo y la diversidad "
+            "de estructuras involucradas hacen de este tema uno de los más dinámicos en la liquenología."
+        ),
         "subtemas": {
             "Reproducción sexual": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Contexto genético en líquenes": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Debate actual": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Los líquenes foliícolas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Diversidad de estructuras reproductivas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Morfogénesis de los soredios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Morfogénesis de los isidios": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Morfogénesis del Peritecio": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
     "🏷️ Sistemática y Taxonomía": {
-        "descripcion_general": "Organización de la diversidad liquénica en un sistema clasificatorio.",
+        "descripcion_general": (
+            "La sistemática y taxonomía liquénica organiza la diversidad de líquenes en un sistema "
+            "clasificatorio coherente. Desde los conceptos de especie hasta los géneros más "
+            "representativos en México, esta disciplina integra morfología, química y filogenia."
+        ),
         "subtemas": {
             "Conceptos clave en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Conceptos alternativos a especie taxonómica": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Caracteres usados en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Cromatografía en Capa Fina": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Principales órdenes y familias": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Claves interpretativas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
             "Géneros más representativos en México": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Retos en sistemática": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Sistemática y conservación": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Evaluación de especies amenazadas": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
+            "Sistemática y biogeografía": {"texto": "", "imagenes": [], "videos": [], "diagramas": []},
         },
     },
 }
