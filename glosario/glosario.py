@@ -543,131 +543,93 @@ def inject_css():
     }}
 
     /* ─────────────────────────────────────────────
-       POST-IT MODALES (checkbox-hack: 100% compatible
-       con Edge, Chrome, Firefox y Safari; no depende
-       de :target ni de cambios en la URL).
+       POST-IT con <details>/<summary> (HTML nativo).
+       Funciona en Edge, Chrome, Firefox y Safari sin
+       JavaScript, sin :target y sin <input>: Streamlit
+       no los sanea y son 100% compatibles con su DOM.
        ───────────────────────────────────────────── */
-    .postit-wrapper {{
+    .definicion-texto .prose-p {{
+        font-size: 1.07rem;
+        line-height: 1.85;
+        text-align: justify;
+        color: #e8f5e9;
+        margin: 0 0 1rem 0;
+    }}
+    .definicion-texto .prose-p strong {{
+        color: #ffffff;
+    }}
+    .term-detail {{
+        display: inline;
         position: relative;
     }}
-    .postit-toggle {{
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        width: 0;
-        height: 0;
-        margin: 0;
-        padding: 0;
-    }}
-    .term-link {{
-        color: #ffd700 !important;
+    .term-detail > summary.term-link {{
+        display: inline;
+        list-style: none;
+        cursor: pointer;
+        color: #ffd700;
         text-decoration: underline;
         text-decoration-style: dotted;
         text-underline-offset: 3px;
         font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        display: inline;
+        transition: color 0.2s, text-shadow 0.2s;
     }}
-    .term-link:hover {{
-        color: #ffed4a !important;
+    .term-detail > summary.term-link::-webkit-details-marker {{
+        display: none;
+    }}
+    .term-detail > summary.term-link::marker {{
+        content: "";
+        display: none;
+    }}
+    .term-detail > summary.term-link:hover {{
+        color: #ffed4a;
         text-shadow: 0 0 8px rgba(255,215,0,0.45);
     }}
-    .postit-modal {{
+    .term-detail .postit-card {{
         display: none;
-        position: fixed;
-        z-index: 9999;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.6);
-        -webkit-backdrop-filter: blur(3px);
-        backdrop-filter: blur(3px);
     }}
-    .postit-toggle:checked ~ .postit-modal {{
+    .term-detail[open] > .postit-card {{
         display: block;
-        animation: fadeIn 0.25s ease;
-    }}
-    .postit-backdrop {{
         position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        display: block;
-    }}
-    .postit-content {{
-        position: relative;
+        top: calc(100% + 10px);
+        left: 0;
+        z-index: 100;
+        width: 360px;
+        max-width: min(360px, 80vw);
         background: #fef3a8;
         background: linear-gradient(135deg, #fef3a8 0%, #f9e79f 100%);
-        margin: 10vh auto;
-        padding: 2rem 2.25rem;
-        width: 90%;
-        max-width: 520px;
-        border-radius: 2px;
+        color: #2c3e50;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        padding: 1.1rem 1.4rem;
+        border-radius: 3px;
         box-shadow:
-            0 1px 4px rgba(0,0,0,0.2),
-            0 0 40px rgba(0,0,0,0.1) inset,
-            5px 5px 20px rgba(0,0,0,0.4);
-        color: #2c3e50 !important;
-        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        transform: rotate(-1deg);
-        animation: slideIn 0.35s ease;
+            0 1px 4px rgba(0,0,0,0.25),
+            0 0 40px rgba(0,0,0,0.12) inset,
+            4px 5px 22px rgba(0,0,0,0.45);
+        transform: rotate(-1.4deg);
+        animation: postitIn 0.25s ease;
+        white-space: normal;
+        text-align: left;
     }}
-    .postit-content::before {{
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 28px;
-        background: rgba(0,0,0,0.04);
-        border-radius: 2px 2px 0 0;
+    @keyframes postitIn {{
+        from {{ opacity: 0; transform: translateY(-8px) rotate(-3deg); }}
+        to   {{ opacity: 1; transform: translateY(0) rotate(-1.4deg); }}
     }}
-    @keyframes fadeIn {{
-        from {{ opacity: 0; }}
-        to   {{ opacity: 1; }}
-    }}
-    @keyframes slideIn {{
-        from {{ transform: translateY(-40px) rotate(-3deg); opacity: 0; }}
-        to   {{ transform: translateY(0) rotate(-1deg); opacity: 1; }}
-    }}
-    .postit-content h3 {{
-        color: #1a3025 !important;
-        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
-        font-size: 1.45rem !important;
-        margin: 0 0 0.85rem 0 !important;
-        border-bottom: 2px solid rgba(0,0,0,0.1);
-        padding-bottom: 0.5rem;
-    }}
-    .postit-content p {{
-        color: #2c3e50 !important;
-        font-family: 'Patrick Hand', 'Comic Sans MS', cursive !important;
-        font-size: 1.1rem !important;
-        line-height: 1.7 !important;
-        margin: 0 !important;
-    }}
-    .postit-close {{
-        position: absolute;
-        top: 8px;
-        right: 14px;
-        color: #8b7355;
-        font-size: 1.6rem;
+    .postit-card .postit-title {{
+        display: block;
+        color: #1a3025;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+        font-size: 1.2rem;
         font-weight: bold;
-        cursor: pointer;
-        line-height: 1;
-        user-select: none;
-        z-index: 10;
-        transition: color 0.2s;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 2px solid rgba(0,0,0,0.12);
     }}
-    .postit-close:hover {{
-        color: #5d4e37;
-    }}
-    .definicion-texto p {{
-        font-size: 1.07rem !important;
-        line-height: 1.85 !important;
-        text-align: justify;
-        color: #e8f5e9 !important;
+    .postit-card .postit-body {{
+        display: block;
+        color: #2c3e50;
+        font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
     }}
     </style>
     """
@@ -677,76 +639,81 @@ inject_css()
 
 # ─────────────────────────────────────────────
 # FUNCIÓN: Generar HTML de definición con post-its
-# (usa el "checkbox-hack" para que los modales
-# funcionen en Edge sin depender de :target ni JS)
+# Usa <details>/<summary> (HTML nativo). Funciona en
+# Edge, Chrome, Firefox y Safari sin JS. No depende
+# de <input> (que Streamlit sanea) ni de :target
+# (que Streamlit intercepta).
 # ─────────────────────────────────────────────
-def generar_texto_definicion_ecologica():
-    toggles = "".join(
-        f'<input type="checkbox" id="ck-{k}" class="postit-toggle">'
-        for k in DEFINICIONES_POSTIT.keys()
+def term(k, label):
+    """Genera un término clickable que despliega su post-it."""
+    info = DEFINICIONES_POSTIT[k]
+    return (
+        f'<details class="term-detail">'
+        f'<summary class="term-link">{label}</summary>'
+        f'<span class="postit-card">'
+        f'<span class="postit-title">📌 {info["titulo"]}</span>'
+        f'<span class="postit-body">{info["definicion"]}</span>'
+        f'</span>'
+        f'</details>'
     )
 
-    def link(k, label):
-        return f'<label for="ck-{k}" class="term-link">{label}</label>'
+def generar_texto_definicion_ecologica():
+    parrafos = [
+        (
+            'Desde una perspectiva ecológica, los <strong>líquenes</strong> se definen como una '
+            + term("simbiosis", "asociación simbiótica mutualista")
+            + ' entre un hongo (micobionte) y uno o más organismos fotosintéticos (fotobiontes), '
+            'generalmente algas verdes o cianobacterias. Esta asociación no es meramente una '
+            'coexistencia casual, sino una integración funcional tan profunda que el conjunto '
+            'resultante —el talo liquénico— se comporta como un único organismo con propiedades '
+            'emergentes que ninguno de sus componentes posee por separado.'
+        ),
+        (
+            'El líquen representa, en esencia, un sistema '
+            + term("estable", "ecológicamente estable")
+            + ' que ha perdurado a través de millones de años de evolución. Su estabilidad no implica '
+            'rigidez, sino una capacidad de mantener la homeostasis interna frente a fluctuaciones '
+            'ambientales significativas. Los líquenes demuestran una notable plasticidad fisiológica, '
+            'operando dentro de '
+            + term("resiliencia", "umbrales de resiliencia")
+            + ' que les permiten sobrevivir en condiciones extremas —desérticas hasta antárticas— '
+            'donde organismos más complejos fracasan.'
+        ),
+        (
+            'A diferencia de las relaciones tróficas convencionales observadas en '
+            + term("troficos", "niveles tróficos")
+            + ' clásicos, la simbiosis liquénica trasciende la simple transferencia de energía. '
+            'El fotobionte aporta carbohidratos fotosintéticos al hongo, quien a su vez proporciona '
+            'protección estructural, agua y nutrientes minerales. Este intercambio simbiótico '
+            'posiciona al líquen en una categoría funcional única: no es un productor primario ni '
+            'un consumidor en el sentido estricto, sino una entidad híbrida que modifica radicalmente '
+            'los flujos de materia y energía en los ecosistemas donde habita.'
+        ),
+        (
+            'Contemporáneamente, la investigación ha revelado que los líquenes son '
+            + term("dinamicas", "asociaciones dinámicas")
+            + ' cuya composición microbiana varía según el contexto ambiental. No son entidades '
+            'estáticas, sino sistemas adaptativos que pueden incorporar bacterias, otros hongos y '
+            'microorganismos según las demandas ecológicas del hábitat. Esta dinamicidad desafía '
+            'las definiciones taxonómicas rígidas y enfatiza su naturaleza como consorcios '
+            'biológicos en constante reconfiguración.'
+        ),
+        (
+            'En la visión más moderna, los líquenes se conceptualizan como un '
+            + term("holobionte", "holobionte complejo")
+            + ': una metaorganización donde el hospedero fúngico y toda su microbiota asociada '
+            'funcionan como una unidad de selección natural. Esta perspectiva holobionte integra '
+            'no solo al micobionte y fotobionte principales, sino también a bacterias, arqueas, '
+            'líquenes endofíticos y virus que modulan la fisiología, ecología y evolución del '
+            'conjunto. El líquen, entonces, no es un organismo dual sino una comunidad funcional '
+            'que ha alcanzado un grado de integración tal que opera como individuo ecológico.'
+        ),
+    ]
 
-    texto = f"""
-    <div class="definicion-texto">
-    <p>Desde una perspectiva ecológica, los <strong>líquenes</strong> se definen como una
-    {link("simbiosis", "asociación simbiótica mutualista")}
-    entre un hongo (micobionte) y uno o más organismos fotosintéticos (fotobiontes),
-    generalmente algas verdes o cianobacterias. Esta asociación no es meramente una
-    coexistencia casual, sino una integración funcional tan profunda que el conjunto
-    resultante —el talo liquénico— se comporta como un único organismo con propiedades
-    emergentes que ninguno de sus componentes posee por separado.</p>
-
-    <p>El líquen representa, en esencia, un sistema {link("estable", "ecológicamente estable")}
-    que ha perdurado a través de millones de años de evolución. Su estabilidad no implica
-    rigidez, sino una capacidad de mantener la homeostasis interna frente a fluctuaciones
-    ambientales significativas. Los líquenes demuestran una notable plasticidad fisiológica,
-    operando dentro de {link("resiliencia", "umbrales de resiliencia")}
-    que les permiten sobrevivir en condiciones extremas —desérticas hasta antárticas—
-    donde organismos más complejos fracasan.</p>
-
-    <p>A diferencia de las relaciones tróficas convencionales observadas en
-    {link("troficos", "niveles tróficos")} clásicos, la simbiosis
-    liquénica trasciende la simple transferencia de energía. El fotobionte aporta carbohidratos
-    fotosintéticos al hongo, quien a su vez proporciona protección estructural, agua y
-    nutrientes minerales. Este intercambio simbiótico posiciona al líquen en una categoría
-    funcional única: no es un productor primario ni un consumidor en el sentido estricto,
-    sino una entidad híbrida que modifica radicalmente los flujos de materia y energía
-    en los ecosistemas donde habita.</p>
-
-    <p>Contemporáneamente, la investigación ha revelado que los líquenes son
-    {link("dinamicas", "asociaciones dinámicas")} cuya composición
-    microbiana varía según el contexto ambiental. No son entidades estáticas, sino sistemas
-    adaptativos que pueden incorporar bacterias, otros hongos y microorganismos según las
-    demandas ecológicas del hábitat. Esta dinamicidad desafía las definiciones taxonómicas
-    rígidas y enfatiza su naturaleza como consorcios biológicos en constante reconfiguración.</p>
-
-    <p>En la visión más moderna, los líquenes se conceptualizan como un
-    {link("holobionte", "holobionte complejo")}: una metaorganización
-    donde el hospedero fúngico y toda su microbiota asociada funcionan como una unidad
-    de selección natural. Esta perspectiva holobionte integra no solo al micobionte y
-    fotobionte principales, sino también a bacterias, arqueas, líquenes endofíticos y
-    virus que modulan la fisiología, ecología y evolución del conjunto. El líquen,
-    entonces, no es un organismo dual sino una comunidad funcional que ha alcanzado
-    un grado de integración tal que opera como individuo ecológico.</p>
-    </div>
-    """
-
-    modales = ""
-    for k, info in DEFINICIONES_POSTIT.items():
-        modales += (
-            f'<div class="postit-modal" data-for="ck-{k}">'
-            f'<label for="ck-{k}" class="postit-backdrop" aria-label="Cerrar"></label>'
-            f'<div class="postit-content">'
-            f'<label for="ck-{k}" class="postit-close" aria-label="Cerrar">&times;</label>'
-            f'<h3>📌 {info["titulo"]}</h3>'
-            f'<p>{info["definicion"]}</p>'
-            f'</div></div>'
-        )
-
-    return f'<div class="postit-wrapper">{toggles}{texto}{modales}</div>'
+    # Sin indentación al inicio de cada línea para evitar que Markdown
+    # interprete los párrafos como bloques de código.
+    cuerpo = "".join(f'<div class="prose-p">{p}</div>' for p in parrafos)
+    return f'<div class="definicion-texto">{cuerpo}</div>'
 
 # ─────────────────────────────────────────────
 # ESTADO DE SESIÓN
@@ -930,33 +897,31 @@ elif st.session_state.vista in CATEGORIAS:
 
             st.markdown("---")
             st.markdown("### 🔬 Implicaciones Ecológicas")
-            st.markdown(
-                """
-                <div class="definicion-texto">
-                <p>La definición ecológica del líquen subraya que no es un mero accidente evolutivo,
-                sino una estrategia biológica exitosa que ha colonizado prácticamente todos los
-                ecosistemas terrestres. Como <strong>pioneros ecológicos</strong>, los líquenes inician
-                la sucesión primaria en sustratos desnudos (roca, suelo volcánico, corteza recién
-                expuesta), contribuyendo a la formación de suelo mediante la acumulación de materia
-                orgánica y la lixiviación de minerales.</p>
-
-                <p>Su función como <strong>indicadores ambientales</strong> deriva directamente de
-                esta definición ecológica: al ser organismos que integran múltiples componentes
-                biológicos en una sola entidad funcional, cualquier alteración en la calidad del aire,
-                agua o suelo se refleja de manera amplificada en su fisiología, crecimiento y
-                distribución. La sensibilidad del holobionte liquénico a los contaminantes atmosféricos
-                lo convierte en una herramienta de monitoreo ambiental sin paralelo en el reino vegetal.</p>
-
-                <p>Finalmente, la naturaleza de <strong>asociación dinámica</strong> explica la
-                extraordinaria diversidad ecológica de los líquenes: un mismo micobionte puede asociarse
-                con diferentes fotobiontes según el hábitat, generando talos morfológicamente distintos
-                adaptados a condiciones lumínicas, hídricas y térmicas específicas. Esta plasticidad
-                simbiótica es, en sí misma, una innovación evolutiva que explica la persistencia y
-                radiación adaptativa de los líquenes a lo largo de más de 400 millones de años.</p>
-                </div>
-                """,
-                unsafe_allow_html=True,
+            implicaciones_html = (
+                '<div class="definicion-texto">'
+                '<div class="prose-p">La definición ecológica del líquen subraya que no es un mero '
+                'accidente evolutivo, sino una estrategia biológica exitosa que ha colonizado '
+                'prácticamente todos los ecosistemas terrestres. Como <strong>pioneros ecológicos'
+                '</strong>, los líquenes inician la sucesión primaria en sustratos desnudos (roca, '
+                'suelo volcánico, corteza recién expuesta), contribuyendo a la formación de suelo '
+                'mediante la acumulación de materia orgánica y la lixiviación de minerales.</div>'
+                '<div class="prose-p">Su función como <strong>indicadores ambientales</strong> '
+                'deriva directamente de esta definición ecológica: al ser organismos que integran '
+                'múltiples componentes biológicos en una sola entidad funcional, cualquier alteración '
+                'en la calidad del aire, agua o suelo se refleja de manera amplificada en su '
+                'fisiología, crecimiento y distribución. La sensibilidad del holobionte liquénico a '
+                'los contaminantes atmosféricos lo convierte en una herramienta de monitoreo '
+                'ambiental sin paralelo en el reino vegetal.</div>'
+                '<div class="prose-p">Finalmente, la naturaleza de <strong>asociación dinámica'
+                '</strong> explica la extraordinaria diversidad ecológica de los líquenes: un mismo '
+                'micobionte puede asociarse con diferentes fotobiontes según el hábitat, generando '
+                'talos morfológicamente distintos adaptados a condiciones lumínicas, hídricas y '
+                'térmicas específicas. Esta plasticidad simbiótica es, en sí misma, una innovación '
+                'evolutiva que explica la persistencia y radiación adaptativa de los líquenes a lo '
+                'largo de más de 400 millones de años.</div>'
+                '</div>'
             )
+            st.markdown(implicaciones_html, unsafe_allow_html=True)
         else:
             st.markdown(
                 '<span class="placeholder-badge">⏳ Contenido en desarrollo</span>',
