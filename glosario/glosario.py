@@ -544,10 +544,13 @@ def inject_css():
     }}
 
     /* ─────────────────────────────────────────────
-       POST-IT con <details>/<summary> (HTML nativo).
-       Funciona en Edge, Chrome, Firefox y Safari sin
-       JavaScript, sin :target y sin <input>: Streamlit
-       no los sanea y son 100% compatibles con su DOM.
+       POST-IT MODAL con <details>/<summary>.
+       - <details> es HTML nativo (no se sanea, no usa
+         <input> ni :target, funciona en Edge).
+       - Solo se muestra un post-it a la vez (atributo
+         name="postit" + JS de respaldo).
+       - El post-it abierto se renderiza como modal
+         centrado con fondo oscuro (no empuja el texto).
        ───────────────────────────────────────────── */
     .definicion-texto .prose-p {{
         font-size: 1.07rem;
@@ -561,7 +564,6 @@ def inject_css():
     }}
     .term-detail {{
         display: inline;
-        position: relative;
     }}
     .term-detail > summary.term-link {{
         display: inline;
@@ -585,74 +587,94 @@ def inject_css():
         color: #ffed4a;
         text-shadow: 0 0 8px rgba(255,215,0,0.45);
     }}
-    .term-detail .postit-card {{
+    .term-detail .postit-modal {{
         display: none;
     }}
-    .term-detail[open] > .postit-card {{
+    .term-detail[open] > .postit-modal {{
         display: block;
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        z-index: 100;
-        width: 360px;
-        max-width: min(360px, 80vw);
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99998;
+        background: rgba(0,0,0,0.6);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        animation: fadeIn 0.2s ease;
+        cursor: pointer;
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; }}
+        to   {{ opacity: 1; }}
+    }}
+    .term-detail[open] > .postit-modal > .postit-content {{
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 99999;
+        width: min(520px, 90vw);
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 1.8rem 2.2rem;
         background: #fef3a8;
         background: linear-gradient(135deg, #fef3a8 0%, #f9e79f 100%);
         color: #2c3e50;
         font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
-        font-size: 1.05rem;
-        line-height: 1.55;
-        padding: 1.1rem 1.4rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
         border-radius: 3px;
+        text-align: left;
+        white-space: normal;
+        cursor: default;
+        transform: translate(-50%, -50%) rotate(-1.4deg);
         box-shadow:
             0 1px 4px rgba(0,0,0,0.25),
             0 0 40px rgba(0,0,0,0.12) inset,
-            4px 5px 22px rgba(0,0,0,0.45);
-        transform: rotate(-1.4deg);
-        animation: postitIn 0.25s ease;
-        white-space: normal;
-        text-align: left;
+            6px 6px 26px rgba(0,0,0,0.5);
+        animation: postitIn 0.3s ease;
     }}
     @keyframes postitIn {{
-        from {{ opacity: 0; transform: translateY(-8px) rotate(-3deg); }}
-        to   {{ opacity: 1; transform: translateY(0) rotate(-1.4deg); }}
+        from {{ opacity: 0; transform: translate(-50%, -50%) rotate(-4deg) scale(0.92); }}
+        to   {{ opacity: 1; transform: translate(-50%, -50%) rotate(-1.4deg) scale(1); }}
     }}
-    .postit-card .postit-title {{
+    .postit-content .postit-title {{
         display: block;
         color: #1a3025;
         font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: bold;
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.4rem;
-        padding-right: 2rem;
+        margin: 0 0 0.7rem 0;
+        padding: 0 2rem 0.5rem 0;
         border-bottom: 2px solid rgba(0,0,0,0.12);
     }}
-    .postit-card .postit-body {{
+    .postit-content .postit-body {{
         display: block;
         color: #2c3e50;
         font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+        font-size: 1.1rem;
+        line-height: 1.65;
     }}
-    .postit-card .postit-close {{
+    .postit-content .postit-close {{
         position: absolute;
-        top: 6px;
-        right: 12px;
-        width: 26px;
-        height: 26px;
-        line-height: 22px;
+        top: 8px;
+        right: 14px;
+        width: 32px;
+        height: 32px;
+        line-height: 28px;
         text-align: center;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: bold;
         color: #8b7355;
         cursor: pointer;
         user-select: none;
         border-radius: 50%;
-        transition: background 0.15s, color 0.15s, transform 0.15s;
+        transition: background 0.15s, color 0.15s, transform 0.2s;
         z-index: 2;
     }}
-    .postit-card .postit-close:hover {{
+    .postit-content .postit-close:hover {{
         color: #5d4e37;
-        background: rgba(0,0,0,0.08);
+        background: rgba(0,0,0,0.1);
         transform: rotate(90deg);
     }}
     </style>
@@ -669,27 +691,42 @@ inject_css()
 # (que Streamlit intercepta).
 # ─────────────────────────────────────────────
 def term(k, label):
-    """Genera un término clickable que despliega su post-it."""
+    """Genera un término clickable que despliega un modal con su definición.
+
+    Estructura:
+      <details name="postit">           ← el atributo `name` agrupa todos los
+        <summary>término</summary>         post-its: al abrir uno, los navegadores
+        <span class="postit-modal">        modernos cierran los demás automáticamente.
+          <span class="postit-content">  ← post-it amarillo (no se cierra al
+            <span class="postit-close">     hacer clic dentro)
+            <span class="postit-title">
+            <span class="postit-body">
+    """
     info = DEFINICIONES_POSTIT[k]
     return (
-        f'<details class="term-detail">'
+        f'<details class="term-detail" name="postit">'
         f'<summary class="term-link">{label}</summary>'
-        f'<span class="postit-card">'
+        f'<span class="postit-modal">'
+        f'<span class="postit-content">'
         f'<span class="postit-close" role="button" aria-label="Cerrar" title="Cerrar">&times;</span>'
         f'<span class="postit-title">📌 {info["titulo"]}</span>'
         f'<span class="postit-body">{info["definicion"]}</span>'
+        f'</span>'
         f'</span>'
         f'</details>'
     )
 
 
 def inyectar_handler_cerrar_postit():
-    """Inyecta un manejador JS global (vía iframe) que cierra los post-its.
+    """Inyecta el JS de control de post-its vía iframe.
 
-    Se hace clic en la "×" o fuera del post-it y se cierra el <details>
-    correspondiente. Usa parent.document porque streamlit.components.v1.html
-    renderiza un iframe; necesitamos enganchar los listeners al documento
-    principal de Streamlit.
+    Responsabilidades:
+      1. Cerrar el post-it activo al hacer clic en la "×".
+      2. Cerrar al hacer clic en el fondo oscuro (.postit-modal) sin afectar
+         clics dentro del .postit-content.
+      3. Cerrar con la tecla Escape.
+      4. Garantizar exclusividad (un solo post-it abierto) incluso en
+         navegadores que aún no implementen el atributo `name` en <details>.
     """
     components.html(
         """
@@ -699,8 +736,17 @@ def inyectar_handler_cerrar_postit():
           if (!doc || doc.__postitHandlerAttached) return;
           doc.__postitHandlerAttached = true;
 
+          function cerrarTodos() {
+            doc.querySelectorAll('details.term-detail[open]').forEach(function (d) {
+              d.removeAttribute('open');
+            });
+          }
+
           doc.addEventListener('click', function (e) {
-            const closeBtn = e.target && e.target.closest && e.target.closest('.postit-close');
+            const t = e.target;
+            if (!t) return;
+
+            const closeBtn = t.closest && t.closest('.postit-close');
             if (closeBtn) {
               const d = closeBtn.closest('details.term-detail');
               if (d) {
@@ -710,21 +756,41 @@ def inyectar_handler_cerrar_postit():
               }
               return;
             }
-            const opened = doc.querySelectorAll('details.term-detail[open]');
-            opened.forEach(function (d) {
-              if (!d.contains(e.target)) {
+
+            const inContent = t.closest && t.closest('.postit-content');
+            if (inContent) return;
+
+            const inModal = t.closest && t.closest('.postit-modal');
+            if (inModal) {
+              const d = inModal.closest('details.term-detail');
+              if (d) {
                 d.removeAttribute('open');
+                e.preventDefault();
+                e.stopPropagation();
               }
-            });
+              return;
+            }
+
+            const summary = t.closest && t.closest('summary.term-link');
+            if (!summary) {
+              cerrarTodos();
+            }
           }, true);
 
           doc.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-              doc.querySelectorAll('details.term-detail[open]').forEach(function (d) {
-                d.removeAttribute('open');
-              });
+              cerrarTodos();
             }
           });
+
+          doc.addEventListener('toggle', function (e) {
+            const d = e.target;
+            if (!d || !d.classList || !d.classList.contains('term-detail')) return;
+            if (!d.open) return;
+            doc.querySelectorAll('details.term-detail[open]').forEach(function (other) {
+              if (other !== d) other.removeAttribute('open');
+            });
+          }, true);
         })();
         </script>
         """,
